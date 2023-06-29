@@ -1,8 +1,8 @@
 <template>
     <div>
 <form  @input="valueChanged" @keydown.enter="formSubmitted" class="add-new">
-    <input ref="firstInput" v-model="newName"  type="text" />
-    <input v-model="subtitle" type="text" /> 
+    <input ref="firstInput" v-model="newDude.name"  type="text" />
+    <input v-model="newDude.subtitle" type="text" /> 
 </form>
     </div>
 </template>
@@ -11,19 +11,18 @@
     export default {
         data() {
             return {
-                newName:'',
-                subtitle:''
+                newDude:{name:'',subtitle:''}
             }
         },
         methods: {
             formSubmitted() {
-                this.$emit('add-dude',{name:this.newName,subtitle:this.subtitle})
-                this.newName=''
-                this.subtitle=''
+                this.$emit('add-dude',this.newDude)
+                this.newDude = {name:'',subtitle:''}
+                this.valueChanged();
                 this.$refs.firstInput.focus()
             },
             valueChanged(e){
-                this.$emit('new-preview',{name:this.newName,subtitle:this.subtitle})
+                window.eventBus.emit('new-preview',this.newDude)
             }
         },
     }

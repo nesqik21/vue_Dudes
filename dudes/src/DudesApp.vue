@@ -6,8 +6,8 @@
     </li>
 </ul>
 
-<create-form-dude @new-preview="newDude = $event" @add-dude="characters.push($event);emptyNewDude()" />
-<preview-dude :dude="newDude"/>
+<create-form-dude @add-dude="console.log('EVENT',$event);addNewDude($event);" />
+<preview-dude/>
 
 </div>
 </template> 
@@ -33,8 +33,10 @@ export default {
         }
     },
     methods: {
-        emptyNewDude() {
-            this.newDude={name:'',subtitle:''}
+        addNewDude(e){
+            if(e.name != '' && e.subtitle != ''){
+                this.characters.push(e);
+            }
         }
     },
 }

@@ -11,8 +11,18 @@
 
 <script>
     export default {
-        props:['dude']
-    }
+        data() {
+            return {
+                dude:{name:'',subtitle:''}
+            }
+        },
+        created () {
+            window.eventBus.on('new-preview',event => {
+                this.dude = event
+            });
+        },
+        }
+    
 </script>
 
 <style lang="scss" scoped>

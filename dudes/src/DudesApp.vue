@@ -6,26 +6,22 @@
     </li>
 </ul>
 
-<create-form-dude @new-preview="newDude = $event" @add-dude="characters.push($event)" />
+<create-form-dude @new-preview="newDude = $event" @add-dude="characters.push($event);emptyNewDude()" />
+<preview-dude :dude="newDude"/>
 
-<p class="preview">
-    {{newDude.name }}
-</p>
-<p class="preview">
-    {{newDude.subtitle }}
-</p>
 </div>
 </template> 
 
 <script>
 import Dude from './components/Dude.vue'; 
 import CreateFormDude from './components/CreateFormDude.vue'; 
-
+import PreviewDude from './components/PreviewDude.vue'; 
 
 export default {
     components: {
         Dude,
-        CreateFormDude
+        CreateFormDude,
+        PreviewDude
     },
     data() {
         return {
@@ -34,6 +30,11 @@ export default {
                 {name:'Homer Simpson',subtitle:'He is from The Simpsons series, where he is funny dude.'},
                 {name:'Cartman', subtitle:'He is from The Southpark series, he is small fat dude.'},
                 {name:'Rick and Morty',subtitle:'They are from the Rick and Morthy series, I dont know them'}]
+        }
+    },
+    methods: {
+        emptyNewDude() {
+            this.newDude={name:'',subtitle:''}
         }
     },
 }

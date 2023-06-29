@@ -6,26 +6,30 @@
     </li>
 </ul>
 
-<form @submit.prevent="characters.push(newDude )" class="add-new">
-    <input v-model="newDude" type="text" /> 
-</form>
+<create-form-dude @new-preview="newDude = $event" @add-dude="characters.push($event)" />
 
 <p class="preview">
-    {{newDude }}
+    {{newDude.name }}
+</p>
+<p class="preview">
+    {{newDude.subtitle }}
 </p>
 </div>
-</template>
+</template> 
 
 <script>
-import Dude from './components/Dude.vue';
+import Dude from './components/Dude.vue'; 
+import CreateFormDude from './components/CreateFormDude.vue'; 
+
 
 export default {
     components: {
         Dude,
+        CreateFormDude
     },
     data() {
         return {
-            newDude:'',
+            newDude:{name:'',subtitle:''},
             characters: [
                 {name:'Homer Simpson',subtitle:'He is from The Simpsons series, where he is funny dude.'},
                 {name:'Cartman', subtitle:'He is from The Southpark series, he is small fat dude.'},
